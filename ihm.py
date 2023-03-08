@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import pymysql
 
 app = Flask(__name__)
@@ -6,7 +6,7 @@ db = pymysql.connect(host='localhost', user='root', password = 'password', db = 
 
 @app.route('/')
 def index():
-    return "BINOUZ'ours"
+    return ""
 
 @app.route('/items', methods=['GET'])
 def get_items():
