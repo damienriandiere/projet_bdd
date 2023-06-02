@@ -7,95 +7,104 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
-      
+
 <body>
 
-<h1 style="text-align:center;">Création de compte</h1>
+    <div class="container">
+        <h1 style="text-align:center;">Création de compte</h1>
 
-<div class="row">
-<form class="col s12" action="?page=user_add" method="POST">
+        <div class="row">
+            <form class="col s12" action="?page=user_add" method="POST">
 
-    <div class="row">
-    <div class="input-field col s6">
-    <input type="text" id="nom" name="nom" required>
-    <label for="nom">Nom :</label>
-    </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" id="nom" name="nom" required>
+                        <label for="nom">Nom :</label>
+                    </div>
 
-    <div class="input-field col s6">
-    <input type="text" id="prenom" name="prenom" required>
-    <label for="prenom">Prénom :</label>
-    </div>
-    </div>
-    <br><br>
-    
-    <div class="row">
-    <div class="input-field col s12">
-    <div class="input-field col s6">
-    <input type="email" id="email" name="email" required>
-    <label for="email">Email :</label>
-    </div>
-    
-    <div class="input-field col s6">
-    <input type="date" id="dateNaissance" name="dateNaissance" required>
-    <label for="dateNaissance">Date de naissance :</label>
-    </div>
-    </div>
-    <br><br>
-    
-    <div class="row">
-    <div class="input-field col s12">
-    <div class="input-field col s6">
-    <input type="text" id="noBancaire" name="noBancaire" required>
-    <label for="noBancaire">Numéro bancaire :</label>
-    </div>
-    
-    <div class="row">
-    <div class="input-field col s6">
-    <input type="text" id="website" name="website" required>
-    <label for="website">Site web :</label>
-    </div>
-    </div>
-    <br><br>
-    
-    <div class="row">
-    <div class="input-field col s12">
-    <div class="input-field col s6">
-    <input type="text" id="facebook" name="facebook" required>
-    <label for="facebook">Facebook :</label>
-    </div>
-    
-    <div class="row">
-    <div class="input-field col s6">
-    <input type="text" id="adresse" name="adresse" required>
-    <label for="adresse">Adresse :</label>
-    </div>
-    </div>
-    <br><br>
-    
-    <div class="row">
-    <div class="input-field col s12">
-    <textarea id="description" name="description" required></textarea>
-    <label for="description">Description :</label></textarea>
-    </div>
-    <br><br>
+                    <div class="input-field col s6">
+                        <input type="text" id="prenom" name="prenom" required>
+                        <label for="prenom">Prénom :</label>
+                    </div>
+                </div>
+                <br><br>
 
-    <div class="row">
-    <div class="input-field col s12">
-    <div class="input-field col s6">
-	<input type="text" id="codePostal" name="codePostal" required>
-    <label for="codePostal">Code postal :</label>
-	</div>
-    
-    <div class="row">
-    <div class="input-field col s6">
-    <input type="text" id="telephone" name="telephone" required>
-    <label for="telephone">Téléphone :</label>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <div class="input-field col s6">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email :</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <input type="date" id="dateNaissance" name="dateNaissance" required>
+                            <label for="dateNaissance">Date de naissance :</label>
+                        </div>
+                    </div>
+                    <br><br>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <div class="input-field col s6">
+                                <input type="text" id="noBancaire" name="noBancaire" required>
+                                <label for="noBancaire">Numéro bancaire :</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input type="text" id="website" name="website" required>
+                                    <label for="website">Site web :</label>
+                                </div>
+                            </div>
+                            <br><br>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <div class="input-field col s6">
+                                        <input type="text" id="facebook" name="facebook" required>
+                                        <label for="facebook">Facebook :</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input type="text" id="adresse" name="adresse" required>
+                                    <label for="adresse">Adresse :</label>
+                                </div>
+                            </div>
+                            <br><br>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="description" name="description" required></textarea>
+                                    <label for="description">Description :</label></textarea>
+                                </div>
+                            </div>
+                            <br><br>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <div class="input-field col s6">
+                                        <input type="text" id="codePostal" name="codePostal" required>
+                                        <label for="codePostal">Code postal :</label>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input type="text" id="telephone" name="telephone" required>
+                                            <label for="telephone">Téléphone :</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
+
+                            <button class="btn waves-effect waves-light center" type="submit"
+                                name="action">Soumettre</button>
+            </form>
+        </div>
     </div>
-    </div>
-    <br><br>
-    
-    <button class="btn waves-effect waves-light center" type="submit" name="action">Soumettre</button>
-  </form>
-</div>
 </body>
+
 </html>
