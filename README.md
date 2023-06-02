@@ -1,2 +1,2 @@
 # projet_bdd
-Create a IHM web who change a db in MySQL
+Creating a GUI website that modifies a MySQL database
