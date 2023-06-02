@@ -12,6 +12,22 @@
     .btn-rounded {
       border-radius: 20px;
     }
+	nav{
+		background-color: #2E2E2E;
+	}
+
+	.page-footer{
+		background-color: #2E2E2E;
+	}
+
+	nav ul li a {
+      text-decoration: none;
+    }
+	
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
   </style>
 </head>
 <body>
@@ -19,7 +35,7 @@
   <nav>
     <div class="nav-wrapper">
       <div class="center">
-        <a href="MainView.html" class="brand-logo">Gogitfy</a>
+        <a href="?page=/" class="brand-logo">Gogitfy</a>
       </div>
       <div class="left">
         <div class="dropdown">
@@ -35,6 +51,8 @@
 			</ul>
 		  </div>
       </div>
+	  <div class="right">
+		<a href="?page=addClient"><i class="material-icons">login</i></a>
     </div>
   </nav>
 
@@ -74,10 +92,29 @@
 							<button class="btn btn-rounded grey text-white">SHOW MORE</button>
 						</div>
 					  </div>
-					</div></td>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="center">
+					<img src="../images/kit.png" alt="Kit parfumerie" height="400">
+				</td>
+				<td class="center">
+					<img src="../images/parfum.png" alt="Parfum" height="300">
+				</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
+
+
+<footer class="page-footer">
+	<div class="footer-copyright">
+	  <div class="container">
+		<p class="left">© 2023 Copyright All right reserved</p>
+		<a class="grey-text text-lighten-4 right" href="?page=contact">Contact</a>
+	  </div>
+	</div>
+  </footer>
 </body>
 </html>
