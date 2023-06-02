@@ -5,8 +5,6 @@
   <title>test</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <style>
     .btn-rounded {
@@ -34,27 +32,26 @@
 
   <nav>
     <div class="nav-wrapper">
-      <div class="center">
-        <a href="?page=/" class="brand-logo">Gogitfy</a>
-      </div>
-      <div class="left">
-        <div class="dropdown">
-			<a class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-			  <i class="material-icons">menu</i>
-			</a>
-			<ul class="dropdown-menu">
-			  <li>  <form method="post" action="?page=addClient">
-				<div>
-				  <input type="submit" value="Ajouter un client" name="AjouterUnClient">
-				</div>
-			  </form></li>
-			</ul>
-		  </div>
-      </div>
-	  <div class="right">
-		<a href="?page=addClient"><i class="material-icons">login</i></a>
-    </div>
+        <a href="?page=/" class="brand-logo center">Gogitfy</a>
+		<ul id="nav-mobile" class="left hide-on-med-and-down">
+			<li>
+			  <a class="dropdown-trigger" href="#" data-target="dropdown1"><i class="material-icons right">menu</i></a>
+			  <!-- Dropdown Structure -->
+			  <ul id="dropdown1" class="dropdown-content">
+				<li><a href="?page=addClient">Ajouter un client</a></li>
+			  </ul>
+			</li>
+		  </ul>
+		<a href="?page=addClient" class="right"><i class="material-icons">login</i></a>
   </nav>
+
+    <!-- Initialisation du dropdown -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+		  var dropdowns = document.querySelectorAll('.dropdown-trigger');
+		  var instances = M.Dropdown.init(dropdowns);
+		});
+	  </script>
 
 <div class="container">
 	<table>
@@ -64,7 +61,7 @@
 					<div class="card horizontal">
 					  <div class="card-stacked">
 						<div class="card-content center">
-						  <h2>Searching client IDs</h2>
+						  <h3>Searching client IDs</h3>
 						</div>
 						<div class="card-action center">
 							<button class="btn btn-rounded grey text-white">SHOW MORE</button>
@@ -75,7 +72,7 @@
 					<div class="card horizontal">
 					  <div class="card-stacked">
 						<div class="card-content center">
-						  <h2>Order management</h2>
+						  <h3>Order management</h3>
 						</div>
 						<div class="card-action center">
 							<button class="btn btn-rounded grey text-white">SHOW MORE</button>
@@ -86,7 +83,7 @@
 					<div class="card horizontal">
 					  <div class="card-stacked">
 						<div class="card-content center">
-						  <h2>Generate an invoice</h2>
+						  <h3>Generate an invoice</h3>
 						</div>
 						<div class="card-action center">
 							<button class="btn btn-rounded grey text-white">SHOW MORE</button>
@@ -97,10 +94,12 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="center">
-					<img src="../images/kit.png" alt="Kit parfumerie" height="400">
+					<img src="../images/kit.png" alt="Kit parfumerie" height="300"><br>
+					<span><i>Le dernier kit de parfumerie d'Enuca.</i></span>
 				</td>
 				<td class="center">
-					<img src="../images/parfum.png" alt="Parfum" height="300">
+					<img src="../images/parfum.png" alt="Parfum" height="300"><br>
+					<span><i>Le parfum le plus populaire du moment : Jasmin Noir l'essence.</i></span>
 				</td>
 			</tr>
 		</tbody>
