@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        .btn-rounded {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-wrapper">
+            <div class="center">
+                <a href="MainView.html" class="brand-logo">Gogitfy</a>
+            </div>
+            <div class="left">
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form method="post" action="?page=addClient">
+                                <div>
+                                    <input type="submit" value="Ajouter un client" name="AjouterUnClient">
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="center">Ajouter un concierge</h1>
+        <form method="post" action="?page=addConcierge">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="nom" type="text" class="validate" name="nom">
+                    <label for="nom">Nom</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="prenom" type="text" class="validate" name="prenom">
+                    <label for="prenom">Prénom</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="email" type="email" class="validate" name="email">
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="login" type="text" class="validate" name="login">
+                    <label for="login">Login</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <!-- <input id="password" type="password" class="validate" name="password"> -->
+                    <input type="password" id="password" name="password" class="validate">
+                    <label for="password">Mot de passe</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="telephone" type="text" class="validate" name="telephone">
+                    <label for="telephone">Téléphone</label>
+                </div>
+            </div>
+            <div class="center">
+                <input type="submit" value="Ajouter" name="Ajouter">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
