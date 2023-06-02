@@ -1,19 +1,83 @@
 <!doctype html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <title>test</title>
-		<link rel="stylesheet" href="">
-    </head>
+<head>
+  <meta charset="utf-8">
+  <title>test</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <style>
+    .btn-rounded {
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
 
-		<body>
-			<h1 style="text-align:center;">Bienvenue </h1>
-			<br>
-			<form method ="post" action= "?page=addClient">
+  <nav>
+    <div class="nav-wrapper">
+      <div class="center">
+        <a href="MainView.html" class="brand-logo">Gogitfy</a>
+      </div>
+      <div class="left">
+        <div class="dropdown">
+			<a class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+			  <i class="material-icons">menu</i>
+			</a>
+			<ul class="dropdown-menu">
+			  <li>  <form method="post" action="?page=addClient">
 				<div>
-					<input type="submit" value="Ajouter un client" name="AjouterUnClient">
+				  <input type="submit" value="Ajouter un client" name="AjouterUnClient">
 				</div>
-			</form>
-		</body>
-	</p>
+			  </form></li>
+			</ul>
+		  </div>
+      </div>
+    </div>
+  </nav>
+
+<div class="container">
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<div class="card horizontal">
+					  <div class="card-stacked">
+						<div class="card-content center">
+						  <h2>Searching client IDs</h2>
+						</div>
+						<div class="card-action center">
+							<button class="btn btn-rounded grey text-white">SHOW MORE</button>
+						</div>
+					  </div>
+					</div></td>
+				<td>
+					<div class="card horizontal">
+					  <div class="card-stacked">
+						<div class="card-content center">
+						  <h2>Order management</h2>
+						</div>
+						<div class="card-action center">
+							<button class="btn btn-rounded grey text-white">SHOW MORE</button>
+						</div>
+					  </div>
+					</div></td>
+				<td>
+					<div class="card horizontal">
+					  <div class="card-stacked">
+						<div class="card-content center">
+						  <h2>Generate an invoice</h2>
+						</div>
+						<div class="card-action center">
+							<button class="btn btn-rounded grey text-white">SHOW MORE</button>
+						</div>
+					  </div>
+					</div></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
 </html>
