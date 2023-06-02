@@ -13,6 +13,8 @@ class ApplicationController{
             'addClient' => ['controller'=>null, 'view'=>'AddClient.html'],
             'user_add' => ['controller' => 'AddUserController', 'view' => 'AddClientValidationView.html'],
             'error' => ['controller'=>null, 'view'=>'ErrorView.html'],
+            'addConcierge' => ['controller'=>null, 'view'=>'AddConcierge.html'],
+            'addConciergeValidation' => ['controller'=>'AddConciergeController', 'view'=>'addConciergeValidationView.html']
         ];
     }
 
