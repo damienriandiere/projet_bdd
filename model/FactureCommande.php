@@ -2,6 +2,9 @@
 class FactureCommande {
     private $id_facture;
     private $id_commande;
+    private $montantCommande;
+    private $FraisService;
+    private $FraisLivraison;
     
     public function __construct() {}
     
@@ -18,8 +21,24 @@ class FactureCommande {
         return $this->id_commande;
     }
 
+    public function getMontantCommande() {
+        return $this->montantCommande;
+    }
+
+    public function getFraisService() {
+        return $this->FraisService;
+    }
+
+    public function getFraisLivraison() {
+        return $this->FraisLivraison;
+    }
+
     public function setId_facture($id_facture) {
         $this->id_facture = $id_facture;
+    }
+
+    public function setFraisLivraison($Frais) {
+        $this->FraisLivraison = $Frais;
     }
 
     public function setId_commande($id_commande) {

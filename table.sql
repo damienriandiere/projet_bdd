@@ -316,3 +316,23 @@ CREATE TABLE EstLie_Membre_Regle (
   CONSTRAINT fk_estlie_membre_regle_regle FOREIGN KEY (id_type_regle) REFERENCES TypeRegle (id_type_regle)
 );
 
+ALTER TABLE FactureCommande ADD FraisService float(9,2) NOT NULL; 
+
+ALTER TABLE FactureCommande ADD MontantCommande float(9,2) NOT NULL;
+
+ALTER TABLE FactureCommande ADD FraisLivraison float(9,2) NOT NULL;
+
+CREATE TRIGGER MontantCommande BEFORE INSERT ON Contient
+FOR EACH ROW
+BEGIN
+  UPDATE FactureCommande SET MontantCommande = MontantCommande + (NEW.prixVente * NEW.quantite) WHERE id_commande = NEW.id_commande;
+END;
+
+CREATE TRIGGER FraisService BEFORE INSERT ON Facture 
+FOR EACH ROW
+BEGIN
+  UPDATE FactureCommande SET FraisService = FraisService WHERE id_facture = NEW.id_facture;
+END;
+
+ALTER TABLE Facture ADD prix float(9,2) NOT NULL;
+ALTER TABLE Facture ADD remise float(9,2) NOT NULL;

@@ -6,6 +6,8 @@ class Facture {
     private $FraisService;
     private $dateUpdate;
     private $valider;
+    private $prix;
+    private $remise;
 
     public function __construct() {}
     
@@ -16,6 +18,7 @@ class Facture {
         $this->valider = $valider;
         $this->FraisService = $FraisService;
         $this->dateUpdate = $dateUpdate;
+
     }
     
     public function getId_facture() {
@@ -66,9 +69,19 @@ class Facture {
         $this->dateUpdate = $dateUpdate;
     }
 
+    public function getPrix() {
+        return $this->prix;
+    }
+
+    public function getRemise() {
+        return $this->remise;
+    }
+
     public function __toString() {
         return json_encode($this);
     }
+
+
 
 }
 ?>

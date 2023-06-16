@@ -25,12 +25,15 @@ class FactureCommandeDAO {
         if($st instanceof FactureCommande){
             $dbc = Database::getInstance()->getConnection();
             // prepare the SQL statement
-            $query = "INSERT INTO FactureCommande ( id_facture, id_commande) VALUES (:idf,:idc);";
+            $query = "INSERT INTO FactureCommande ( id_facture, id_commande, FraisLivraison) VALUES (:idf,:idc,:fl);";
             $stmt = $dbc -> prepare($query);
             
             // bind the paramaters
             $stmt->bindValue(':idf',$st->getId_facture(), PDO::PARAM_INT);
             $stmt->bindValue(':idc',$st->getId_commande(), PDO::PARAM_INT);
+            $stmt->bindValue(':fl',$st->getFraisLivraison(), PDO::PARAM_INT);
+
+            
             
             // execute the prepared statement
             $stmt->execute();
@@ -47,6 +50,7 @@ class FactureCommandeDAO {
             // bind the paramaters
             $stmt->bindValue(':idf',$st->getId_facture(), PDO::PARAM_INT);
             $stmt->bindValue(':idc',$st->getId_commande(), PDO::PARAM_INT);
+            
             
             // execute the prepared statement
             $stmt->execute();
