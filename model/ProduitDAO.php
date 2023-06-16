@@ -22,6 +22,16 @@ class ProduitDAO {
         return $results;
     }
 
+    public final function find($id){
+        $dbc = Database::getInstance()->getConnection();
+        $query = "SELECT * FROM Produit WHERE id_produit = :id";
+        $stmt = $dbc->prepare($query);
+        $stmt->bindValue(':id',$id, PDO::PARAM_INT);
+        $stmt->execute();
+        $results = $stmt->fetchALL(PDO::FETCH_CLASS, 'Produit');
+        return $results;
+    }
+
     public final function insert($st){
         if($st instanceof Produit){
             $dbc = Database::getInstance()->getConnection();

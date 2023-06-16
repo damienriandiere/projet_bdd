@@ -21,6 +21,16 @@ class ContientDAO {
         return $results;
     }
 
+    public final function find($commande){
+        $dbc = Database::getInstance()->getConnection();
+        $query = "SELECT * FROM Contient WHERE id_commande = :idc";
+        $stmt = $dbc->prepare($query);
+        $stmt->bindValue(':idc',$commande, PDO::PARAM_INT);
+        $stmt->execute();
+        $results = $stmt->fetchALL(PDO::FETCH_CLASS, 'Contient');
+        return $results;
+    }
+
     public final function insert($st){
         if($st instanceof Contient){
             $dbc = Database::getInstance()->getConnection();

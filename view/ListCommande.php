@@ -57,30 +57,7 @@
             <a href="?page=addClient" class="right"><i class="material-icons">login</i></a>
     </nav>
 
-    <!-- Initialisation du dropdown -->
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-		  var dropdowns = document.querySelectorAll('.dropdown-trigger');
-		  var instances = M.Dropdown.init(dropdowns);
-		});
-
-		document.addEventListener('DOMContentLoaded', function() {
-		var backToTopBtn = document.querySelector('#back-to-top');
-
-		window.addEventListener('scroll', function() {
-			if (window.pageYOffset > 100) {
-			backToTopBtn.style.display = 'block';
-			} else {
-			backToTopBtn.style.display = 'none';
-			}
-		});
-
-		backToTopBtn.addEventListener('click', function(e) {
-			e.preventDefault();
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-		});
-		});
-	  </script>
+    
 
 
 
@@ -97,24 +74,47 @@
                     <th>Id commande</th>
                     <th>Date commande</th>
                     <th>Statut</th>
-                    <th>Id client</th>
+                    <th>Nom client</th>
+                    <th>Prénom client</th>
+                    <th>Email client</th>
                     <th>Date reception</th>
+                    <th>Liste des produits</th>
                 </tr>
                 <?php
                 require_once('./model/Commande.php');
                 require_once('./model/CommandeDAO.php');
+
+                require_once('./model/Client.php');
+                require_once('./model/ClientDAO.php');
+
+                require_once('./model/Contient.php');
+                require_once('./model/ContientDAO.php');
+
+                require_once('./model/Produit.php');
+                require_once('./model/ProduitDAO.php');
 
                 $tab = CommandeDAO::getInstance()->findAll();
 
 
                 //faire un foreach sur le tableau de commande
                 foreach ($tab as $commande) {
+                    $client = ClientDAO::getInstance()->find($commande->getId_client())[0];
+                    $contient = ContientDAO::getInstance()->find($commande->getId_commande());
+                    $contenu = "";
+                    foreach ($contient as $Listproduit) {
+                        $produit = ProduitDAO::getInstance()->find($Listproduit->getId_produit());
+                        $contenu .= $Listproduit->getQuantite() . " " . $produit[0]->getNom() . " " . $Listproduit->getPrixVente() . "€<br>";
+                    }
+
                     echo "<tr>";
                     echo "<td>" . $commande->getId_commande() . "</td>";
                     echo "<td>" . $commande->getDateCommande() . "</td>";
                     echo "<td>" . $commande->getStatut() . "</td>";
-                    echo "<td>" . $commande->getId_client() . "</td>";
+                    echo "<td>" . $client->getNom() . "</td>";
+                    echo "<td>" . $client->getPrenom() . "</td>";
+                    echo "<td>" . $client->getEmail() . "</td>";
                     echo "<td>" . $commande->getDateReception() . "</td>";
+                    echo "<td>" . $contenu . "</td>";
                     echo "</tr>";
                 }
                 ?>
@@ -130,7 +130,7 @@
 
                 // Parcourir toutes les lignes du tableau et masquer celles qui ne correspondent pas à la recherche
                 for (let i = 0; i < rows.length; i++) {
-                    let nameColumn = rows[i].getElementsByTagName("td")[3];
+                    let nameColumn = rows[i].getElementsByTagName("td")[1];
                     console.log(rows);
                     let name = nameColumn.textContent || nameColumn.innerText;
 

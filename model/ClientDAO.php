@@ -22,6 +22,16 @@ class ClientDAO {
         return $results;
     }
 
+    public final function find($st){
+        $dbc = Database::getInstance()->getConnection();
+        $query = "SELECT * FROM Client WHERE id_client = :id";
+        $stmt = $dbc->prepare($query);
+        $stmt->bindValue(':id',$st, PDO::PARAM_INT);
+        $stmt->execute();
+        $results = $stmt->fetchALL(PDO::FETCH_CLASS, 'Client');
+        return $results;
+    }
+
     public final function insert($st){
         if($st instanceof Client){
             $dbc = Database::getInstance()->getConnection();
