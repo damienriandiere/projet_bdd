@@ -11,13 +11,14 @@ class Facture {
 
     public function __construct() {}
     
-    public function init($id_facture, $dateFacture, $nom, $valider, $FraisService, $dateUpdate) {
+    public function init($id_facture, $dateFacture, $nom, $valider, $FraisService, $dateUpdate, $remise) {
         $this->id_facture = $id_facture;
         $this->dateFacture = $dateFacture;
         $this->nom = $nom;
         $this->valider = $valider;
         $this->FraisService = $FraisService;
         $this->dateUpdate = $dateUpdate;
+        $this->remise = $remise;
 
     }
     
@@ -75,6 +76,15 @@ class Facture {
 
     public function getRemise() {
         return $this->remise;
+    }
+
+    public function setPrix($prix) {
+        $this->prix = $prix;
+
+    }
+
+    public function setRemise($remise) {
+        $this->remise = $remise;
     }
 
     public function __toString() {

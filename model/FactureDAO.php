@@ -25,7 +25,7 @@ class FactureDAO {
         if($st instanceof Facture){
             $dbc = Database::getInstance()->getConnection();
             // prepare the SQL statement
-            $query = "INSERT INTO Facture ( nom, dateFacture, FraisService,dateUpdate,valider) VALUES (:n,:d,:m,:f,:u,:v);";
+            $query = "INSERT INTO Facture ( nom, dateFacture, FraisService,dateUpdate,valider,prix,remise) VALUES (:n,:d,:m,:f,:u,:v,:p,:r);";
             $stmt = $dbc -> prepare($query);
             
             // bind the paramaters
@@ -35,6 +35,8 @@ class FactureDAO {
             $stmt->bindValue(':f',$st->getFraisService(), PDO::PARAM_STR);
             $stmt->bindValue(':u',$st->getDateUpdate(), PDO::PARAM_STR);
             $stmt->bindValue(':v',$st->getValider(), PDO::PARAM_STR);
+            $stmt->bindValue(':p',$st->getPrix(), PDO::PARAM_STR);
+            $stmt->bindValue(':r',$st->getRemise(), PDO::PARAM_STR);
             
             // execute the prepared statement
             $stmt->execute();
@@ -60,7 +62,7 @@ class FactureDAO {
         if($st instanceof Facture){
             $dbc = Database::getInstance()->getConnection();
             // prepare the SQL statement
-            $query = "UPDATE Facture SET nom = :n, dateFacture = :d, FraisService = :f,dateUpdate = :u,valider = :v WHERE id_facture = :id;";
+            $query = "UPDATE Facture SET nom = :n, dateFacture = :d, FraisService = :f,dateUpdate = :u, valider = :v , prix = :p , remise = :r WHERE id_facture = :id;";
             $stmt = $dbc -> prepare($query);
             
             // bind the paramaters
@@ -70,6 +72,8 @@ class FactureDAO {
             $stmt->bindValue(':u',$st->getDateUpdate(), PDO::PARAM_STR);
             $stmt->bindValue(':v',$st->getValider(), PDO::PARAM_STR);
             $stmt->bindValue(':id',$st->getId_facture(), PDO::PARAM_INT);
+            $stmt->bindValue(':p',$st->getPrix(), PDO::PARAM_STR);
+            $stmt->bindValue(':r',$st->getRemise(), PDO::PARAM_STR);
 
             // execute the prepared statement
             $stmt->execute();
