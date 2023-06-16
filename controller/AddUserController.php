@@ -69,7 +69,7 @@ class AddUserController implements Controller
             $telephoneDAO=TelephoneDAO::getInstance();
             $telephoneDAO->insert($telephoneCreate);
             $client = new Client();
-            $client->init(2748,$nom, $prenom, $email, $dateNaissance, $noBancaire, $website, $facebook, $actif, $description, $adresseId, $telephoneId, null);
+            $client->init(2748,$nom, $prenom, $email, $dateNaissance, $noBancaire, $website, $facebook, true, $description, $adresseId, $telephoneId, null);
             $clientDAO=ClientDAO::getInstance();
             $clientDAO->insert($client);
         }
