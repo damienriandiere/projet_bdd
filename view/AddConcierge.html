@@ -23,28 +23,21 @@
 
     <nav>
         <div class="nav-wrapper">
-            <div class="center">
-                <a href="MainView.html" class="brand-logo">Gogitfy</a>
-            </div>
-            <div class="left">
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="material-icons">menu</i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <form method="post" action="?page=addClient">
-                                <div>
-                                    <input type="submit" value="Ajouter un client" name="AjouterUnClient">
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+            <a href="?page=/" class="brand-logo center">Gogitfy</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li>
+                  <a class="dropdown-trigger" href="#" data-target="dropdown1"><i class="material-icons right">menu</i></a>
+                  <!-- Dropdown Structure -->
+                  <ul id="dropdown1" class="dropdown-content center">
+                    <li><a href="?page=/">Home</a></li>
+                    <li><a href="?page=addClient">Add a client</a></li>
+                    <li><a href="?page=listCommande">List order</a></li>
+                    <li><a href="?page=listArticle">List article</a></li>
+                  </ul>
+                </li>
+              </ul>
+            <a href="?page=addClient" class="right"><i class="material-icons">login</i></a>
+      </nav>
 
     <div class="container">
         <h1 class="center">Ajouter un concierge</h1>

@@ -15,7 +15,8 @@ class ApplicationController{
             'error' => ['controller'=>null, 'view'=>'ErrorView.html'],
             'addConcierge' => ['controller'=>null, 'view'=>'AddConcierge.html'],
             'addConciergeValidation' => ['controller'=>'AddConciergeController', 'view'=>'addConciergeValidationView.html'],
-            'listCommande' => ['controller'=>null, 'view'=>'ListCommande.php']
+            'listCommande' => ['controller'=>null, 'view'=>'ListCommande.php'],
+            'listArticle' => ['controller'=>null, 'view'=>'ListArticle.php']
         ];
     }
 
