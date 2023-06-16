@@ -51,36 +51,43 @@
                     <ul id="dropdown1" class="dropdown-content center">
                         <li><a href="?page=/">Home</a></li>
                         <li><a href="?page=addClient">Add a client</a></li>
+                        <li><a href="?page=listCommande">List order</a></li>
+                        <li><a href="?page=listArticle">List article</a></li>
+                        <li><a href="?page=addConcierge">Ajouter un concierge</a></li>
+
                     </ul>
                 </li>
             </ul>
-            <a href="?page=addClient" class="right"><i class="material-icons">login</i></a>
+            <a href="?page=connexion" class="right"><i class="material-icons">login</i></a>
     </nav>
 
     <!-- Initialisation du dropdown -->
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-		  var dropdowns = document.querySelectorAll('.dropdown-trigger');
-		  var instances = M.Dropdown.init(dropdowns);
-		});
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropdowns = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(dropdowns);
+        });
 
-		document.addEventListener('DOMContentLoaded', function() {
-		var backToTopBtn = document.querySelector('#back-to-top');
+        document.addEventListener('DOMContentLoaded', function() {
+            var backToTopBtn = document.querySelector('#back-to-top');
 
-		window.addEventListener('scroll', function() {
-			if (window.pageYOffset > 100) {
-			backToTopBtn.style.display = 'block';
-			} else {
-			backToTopBtn.style.display = 'none';
-			}
-		});
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 100) {
+                    backToTopBtn.style.display = 'block';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
 
-		backToTopBtn.addEventListener('click', function(e) {
-			e.preventDefault();
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-		});
-		});
-	  </script>
+            backToTopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 
 
 
@@ -91,32 +98,29 @@
 
         </div>
 
-        <table id="ListOrder" class="table table-striped table-hover">
+        <table id="ListProduct" class="table table-striped table-hover">
             <tbody>
                 <tr>
                     <th>Nom du produit</th>
-                    <th>Date commande</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Total en stock</th>
                     <th>Statut</th>
-                    <th>Id client</th>
-                    <th>Date reception</th>
                 </tr>
                 <?php
-                require_once('./model/Commande.php');
                 require_once('./model/Produit.php');
-                require_once('./model/CommandeDAO.php');
                 require_once('./model/ProduitDAO.php');
 
-                $tab = CommandeDAO::getInstance()->findAll();
                 $tab = ProduitDAO::getInstance()->findAll();
 
                 //faire un foreach sur le tableau de commande
-                foreach ($tab as $commande) {
+                foreach ($tab as $article) {
                     echo "<tr>";
-                    echo "<td>" . $commande->getNom() . "</td>";
-                    echo "<td>" . $commande->getDateCommande() . "</td>";
-                    echo "<td>" . $commande->getStatut() . "</td>";
-                    echo "<td>" . $commande->getId_client() . "</td>";
-                    echo "<td>" . $commande->getDateReception() . "</td>";
+                    echo "<td>" . $article->getNom() . "</td>";
+                    echo "<td>" . $article->getDescription() . "</td>";
+                    echo "<td>" . $article->getPrix() . "</td>";
+                    echo "<td>" . $article->getStock() . "</td>";
+                    echo "<td>" . $article->getStatus() . "</td>";
                     echo "</tr>";
                 }
                 ?>
@@ -127,11 +131,11 @@
             function search() {
                 let input = document.getElementById("searchInput");
                 let filter = input.value.toUpperCase();
-                let table = document.getElementById("ListOrder");
+                let table = document.getElementById("ListProduct");
                 let rows = table.getElementsByTagName("tr");
 
                 // Parcourir toutes les lignes du tableau et masquer celles qui ne correspondent pas à la recherche
-                for (let i = 0; i < rows.length; i++) {
+                for (let i = 1; i < rows.length; i++) {
                     let nameColumn = rows[i].getElementsByTagName("td")[0];
                     console.log(rows);
                     let name = nameColumn.textContent || nameColumn.innerText;

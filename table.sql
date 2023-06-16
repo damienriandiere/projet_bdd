@@ -342,6 +342,22 @@ CREATE TABLE EstLie_Membre_Regle (
   CONSTRAINT fk_estlie_membre_regle_regle FOREIGN KEY (id_type_regle) REFERENCES TypeRegle (id_type_regle)
 );
 
+#Nous avons décider que les frais de service était de 10% par raport au frais de facture
+DELIMITER //
+CREATE TRIGGER calculMontant BEFORE INSERT ON FactureCommande
+FOR EACH ROW
+BEGIN
+  SET NEW.MontantCommande = (SELECT SUM(c.quantite * c.prixVente) FROM Contient AS c WHERE c.id_commande = NEW.id_commande);
+  SET NEW.FraisService = (SELECT SUM(f.FraisService) FROM Facture AS f WHERE f.id_facture = NEW.id_facture) * 0.1;
+  
+  UPDATE Facture AS f
+  SET f.prix = (SELECT SUM(fc.MontantCommande) FROM FactureCommande AS fc WHERE fc.id_facture = NEW.id_facture)
+  WHERE f.id_facture = NEW.id_facture;
+END;
+//
+DELIMITER ;
+
+
 -- Insertion des données
 INSERT INTO Adresse (rue, code_postal) VALUES ('rue de la paix', '72000');
 INSERT INTO Adresse (rue, code_postal) VALUES ('rue de la joie', '72000');

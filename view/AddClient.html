@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Gogitfy | Ajout Client</title>
+  <title>Ajout d'un client</title>
   <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -50,11 +50,38 @@
 				<li><a href="?page=addClient">Add a client</a></li>
 				<li><a href="?page=listCommande">List order</a></li>
 				<li><a href="?page=listArticle">List article</a></li>
+				<li><a href="?page=addConcierge">Ajouter un concierge</a></li>
+
 			  </ul>
 			</li>
 		  </ul>
-		<a href="?page=addClient" class="right"><i class="material-icons">login</i></a>
+		<a href="?page=connexion" class="right"><i class="material-icons">login</i></a>
   </nav>
+
+    <!-- Initialisation du dropdown -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+		  var dropdowns = document.querySelectorAll('.dropdown-trigger');
+		  var instances = M.Dropdown.init(dropdowns);
+		});
+
+		document.addEventListener('DOMContentLoaded', function() {
+		var backToTopBtn = document.querySelector('#back-to-top');
+
+		window.addEventListener('scroll', function() {
+			if (window.pageYOffset > 100) {
+			backToTopBtn.style.display = 'block';
+			} else {
+			backToTopBtn.style.display = 'none';
+			}
+		});
+
+		backToTopBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
+		});
+	  </script>
 
     <!-- Initialisation du dropdown -->
 	<script>

@@ -14,9 +14,11 @@ class ApplicationController{
             'user_add' => ['controller' => 'AddUserController', 'view' => 'AddClientValidationView.html'],
             'error' => ['controller'=>null, 'view'=>'ErrorView.html'],
             'addConcierge' => ['controller'=>null, 'view'=>'AddConcierge.html'],
-            'addConciergeValidation' => ['controller'=>'AddConciergeController', 'view'=>'addConciergeValidationView.html'],
+            'addConciergeValidation' => ['controller'=>'AddConciergeController', 'view'=>'AddConciergeValidation.html'],
             'listCommande' => ['controller'=>null, 'view'=>'ListCommande.php'],
-            'listArticle' => ['controller'=>null, 'view'=>'ListArticle.php']
+            'listArticle' => ['controller'=>null, 'view'=>'ListArticle.php'],
+            'connexion' => ['controller'=>null, 'view'=>'ConnexionConcierge.html'],
+            'connexionValidate' => ['controller'=>"CheckConnexion", 'view'=>'ConnexionValidate.html']
         ];
     }
 

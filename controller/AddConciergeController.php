@@ -1,18 +1,15 @@
 <?php
+require_once('./model/Concierge.php');
+require_once('./model/ConciergeDAO.php');
 
-require_once('./model/Client.php');
-require_once('./model/Adresse.php');
-require_once('./model/Telephone.php');
 
 require_once('Controller.php');
-require_once('./model/ClientDAO.php');
-require_once('./model/AdresseDAO.php');
-require_once('./model/TelephoneDAO.php');
+
 
 /**
  * The class allows you to create a new user of the application
  */
-class AddUserController implements Controller
+class AddConciergeController implements Controller
 {   
     /**
      * It check that the new identifier is not in the database
@@ -38,22 +35,20 @@ class AddUserController implements Controller
     */
     public function handle($request)
     {
+        $utilisateurDAO = ConciergeDAO::getInstance();
         $email = $request['email'];
+        // Nous avons juste choisi de ne pas modifier le mot de passe mais nous aurions utilisé password_hash de php
         $password = $request['password'];
         $nom = $request['nom'];
         $prenom = $request['prenom'];
         $telephone = $request['telephone'];
         $login = $request['login'];
 
-        $options = [
-            'cost' => 3476,
-        ];
-        $password = password_hash($password, PASSWORD_BCRYPT, $options);
+        
 
         if($this->unique($email)){
             $utilisateurCreate = new Concierge();
             $utilisateurCreate->init(0,$nom, $prenom,$telephone,$email, $password, true  ,$login);
-            $utilisateurDAO=AdresseDAO::getInstance();
             $utilisateurDAO->insert($utilisateurCreate);
         }
     }

@@ -21,6 +21,23 @@ class ConciergeDAO{
         return $results;
     }
 
+    public final static function find($email,$password){
+        $dbc = Database::getInstance()->getConnection();
+        $query = "SELECT * FROM Concierge WHERE email = :email AND password = :password";
+        $stmt = $dbc->prepare($query);
+        $stmt->bindValue(':email',$email, PDO::PARAM_STR);
+        $stmt->bindValue(':password',$password, PDO::PARAM_STR);
+        $stmt->execute();
+        $results = $stmt->fetchALL(PDO::FETCH_CLASS, 'Concierge');
+        if(count($results) == 1){
+            return $results[0];
+        }
+        else{
+            return null;
+        }
+        return $results;
+    }
+
     public final function insert($st){
         if($st instanceof Concierge){
             $dbc = Database::getInstance()->getConnection();

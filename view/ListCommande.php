@@ -51,13 +51,44 @@
                     <ul id="dropdown1" class="dropdown-content center">
                         <li><a href="?page=/">Home</a></li>
                         <li><a href="?page=addClient">Add a client</a></li>
+                        <li><a href="?page=listCommande">List order</a></li>
+                        <li><a href="?page=listArticle">List article</a></li>
+                        <li><a href="?page=addConcierge">Ajouter un concierge</a></li>
+
                     </ul>
                 </li>
             </ul>
-            <a href="?page=addClient" class="right"><i class="material-icons">login</i></a>
+            <a href="?page=connexion" class="right"><i class="material-icons">login</i></a>
     </nav>
 
-    
+    <!-- Initialisation du dropdown -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropdowns = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(dropdowns);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var backToTopBtn = document.querySelector('#back-to-top');
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 100) {
+                    backToTopBtn.style.display = 'block';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+
+            backToTopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
 
 
 
@@ -65,7 +96,6 @@
 
         <div class="input-group mb-3">
             <input type="text" class="form-control" id="searchInput" onkeyup="search()" placeholder="Rechercher par nom">
-
         </div>
 
         <table id="ListOrder" class="table table-striped table-hover">
@@ -129,9 +159,8 @@
                 let rows = table.getElementsByTagName("tr");
 
                 // Parcourir toutes les lignes du tableau et masquer celles qui ne correspondent pas à la recherche
-                for (let i = 0; i < rows.length; i++) {
-                    let nameColumn = rows[i].getElementsByTagName("td")[1];
-                    console.log(rows);
+                for (let i = 1; i < rows.length; i++) {
+                    let nameColumn = rows[i].getElementsByTagName("td")[3];
                     let name = nameColumn.textContent || nameColumn.innerText;
 
                     if (name.toUpperCase().indexOf(filter) > -1) {
