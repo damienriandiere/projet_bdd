@@ -1,8 +1,6 @@
 use ENSIM;
 
--- faire un drop table si elle existe
-
-
+-- drop table si elle existe
 Drop table if exists Paye;
 Drop table if exists Fabrique;
 Drop table if exists EstLie_Membre_Regle;
@@ -46,6 +44,7 @@ CREATE TABLE Telephone (
   PRIMARY KEY (id_telephone)
 );
 
+
 -- Create table TypeMembre
 CREATE TABLE TypeMembre (
   id_type_membre int(11) NOT NULL AUTO_INCREMENT,
@@ -66,6 +65,7 @@ CREATE TABLE Membre (
   KEY fk_type_membre (id_type_membre),
   CONSTRAINT fk_type_membre FOREIGN KEY (id_type_membre) REFERENCES TypeMembre (id_type_membre)
 );
+
 
 -- Create table TypeRegle 
 CREATE TABLE TypeRegle (
@@ -88,6 +88,7 @@ CREATE TABLE TypeOperation (
   KEY fk_type_regle (id_type_regle),
   CONSTRAINT fk_type_regle FOREIGN KEY (id_type_regle) REFERENCES TypeRegle (id_type_regle)
 );
+
 
 -- Create table HistoriquePoint
 CREATE TABLE HistoriquePoint (
@@ -122,8 +123,12 @@ CREATE TABLE Client (
   KEY fk_membre (id_membre),
   CONSTRAINT fk_adresse FOREIGN KEY (id_adresse) REFERENCES Adresse (id_adresse),
   CONSTRAINT fk_telephone FOREIGN KEY (id_telephone) REFERENCES Telephone (id_telephone),
-  CONSTRAINT fk_membre FOREIGN KEY (id_membre) REFERENCES Membre (id_membre)
+  CONSTRAINT fk_membre FOREIGN KEY (id_membre) REFERENCES Membre (id_membre),
+  CONSTRAINT chk_email CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
+  CONSTRAINT uc_email UNIQUE (email)
 );
+
+
 
 -- Create table Points
 CREATE TABLE Point (
@@ -135,6 +140,8 @@ CREATE TABLE Point (
   CONSTRAINT fk_client FOREIGN KEY (id_client) REFERENCES Client (id_client),
   PRIMARY KEY (id_point)
 );
+
+
 
 -- Create table TypePayement
 CREATE TABLE TypePayement (
@@ -154,6 +161,8 @@ CREATE TABLE Payement (
   CONSTRAINT fk_type_payement FOREIGN KEY (id_type_payement) REFERENCES TypePayement (id_type_payement)
 );
 
+
+
 -- Create table Fournisseur
 CREATE TABLE Fournisseur (
   id_fournisseur int(11) NOT NULL AUTO_INCREMENT,
@@ -164,6 +173,7 @@ CREATE TABLE Fournisseur (
   telephone varchar(12) NOT NULL,
   PRIMARY KEY (id_fournisseur)
 );
+
 
 -- Create table Produit
 CREATE TABLE Produit (
@@ -196,8 +206,12 @@ CREATE TABLE Facture (
   FraisService float(9,2) NOT NULL,
   dateUpdate date NOT NULL,
   valider BOOLEAN NOT NULL,
+  remise float(9,2),
+  prix float(9,2),
   PRIMARY KEY (id_facture)
 );
+
+
 
 Create table Remise (
   id_remise int(11) NOT NULL AUTO_INCREMENT,
@@ -212,9 +226,13 @@ Create table Remise (
   CONSTRAINT fk_historique_point FOREIGN KEY (id_historique_point) REFERENCES HistoriquePoint (id_historique_point)
 );
 
+
 Create table FactureCommande(
   id_facture int(11) NOT NULL,
   id_commande int(11) NOT NULL,
+  FraisService float(9,2),
+  MontantCommande float(9,2),
+  FraisLivraison float(9,2),
   PRIMARY KEY (id_facture, id_commande),
   KEY fk_facture_FC (id_facture),
   CONSTRAINT fk_facture_FC FOREIGN KEY (id_facture) REFERENCES Facture (id_facture),
@@ -238,6 +256,8 @@ Create table Contient(
   CONSTRAINT fk_produit_Contient FOREIGN KEY (id_produit) REFERENCES Produit (id_produit)
 );
 
+
+
 Create table Concierge(
   id_concierge int(11) NOT NULL AUTO_INCREMENT,
   nom varchar(255) NOT NULL,
@@ -250,12 +270,14 @@ Create table Concierge(
   PRIMARY KEY (id_concierge)
 );
 
+
 CREATE table TypeAction (
   id_type_action int(11) NOT NULL AUTO_INCREMENT,
   libelle varchar(255) NOT NULL,
   date date NOT NULL,
   PRIMARY KEY (id_type_action)
 );
+
 
 Create table Log (
   id_log int(11) NOT NULL AUTO_INCREMENT,
@@ -284,6 +306,7 @@ Create table Valider(
   CONSTRAINT fk_concierge_v FOREIGN KEY (id_concierge) REFERENCES Concierge (id_concierge)
 );
 
+
 Create table Paye (
   id_paye int(11) NOT NULL AUTO_INCREMENT,
   id_facture int(11) NOT NULL,
@@ -294,6 +317,7 @@ Create table Paye (
   KEY fk_payement_p (id_payement),
   CONSTRAINT fk_payement_p FOREIGN KEY (id_payement) REFERENCES Payement (id_payement)
 );
+
 
 Create table Fabrique (
   id_fabrique int(11) NOT NULL AUTO_INCREMENT,
@@ -306,6 +330,8 @@ Create table Fabrique (
   CONSTRAINT fk_fournisseur_f FOREIGN KEY (id_fournisseur) REFERENCES Fournisseur (id_fournisseur)
 );
 
+
+
 CREATE TABLE EstLie_Membre_Regle (
   id_type_membre int(11) NOT NULL,
   id_type_regle int(11) NOT NULL,
@@ -316,23 +342,142 @@ CREATE TABLE EstLie_Membre_Regle (
   CONSTRAINT fk_estlie_membre_regle_regle FOREIGN KEY (id_type_regle) REFERENCES TypeRegle (id_type_regle)
 );
 
-ALTER TABLE FactureCommande ADD FraisService float(9,2) NOT NULL; 
+-- Insertion des données
+INSERT INTO Adresse (rue, code_postal) VALUES ('rue de la paix', '72000');
+INSERT INTO Adresse (rue, code_postal) VALUES ('rue de la joie', '72000');
+INSERT INTO Adresse (rue, code_postal) VALUES ('rue de la tristesse', '72000');
+INSERT INTO Adresse (rue, code_postal) VALUES ('rue de la colere', '72000');
+INSERT INTO Adresse (rue, code_postal) VALUES ('rue de la peur', '72000');
 
-ALTER TABLE FactureCommande ADD MontantCommande float(9,2) NOT NULL;
 
-ALTER TABLE FactureCommande ADD FraisLivraison float(9,2) NOT NULL;
+INSERT INTO Telephone (numero) VALUES ('0243838383');
+INSERT INTO Telephone (numero) VALUES ('0243838384');
+INSERT INTO Telephone (numero) VALUES ('0243838385');
+INSERT INTO Telephone (numero) VALUES ('0243838386');
 
-CREATE TRIGGER MontantCommande BEFORE INSERT ON Contient
-FOR EACH ROW
-BEGIN
-  UPDATE FactureCommande SET MontantCommande = MontantCommande + (NEW.prixVente * NEW.quantite) WHERE id_commande = NEW.id_commande;
-END;
+INSERT INTO TypeMembre (libelle) VALUES ('Bronze');
+INSERT INTO TypeMembre (libelle) VALUES ('Argent');
+INSERT INTO TypeMembre (libelle) VALUES ('Or');
+INSERT INTO TypeMembre (libelle) VALUES ('Platine');
 
-CREATE TRIGGER FraisService BEFORE INSERT ON Facture 
-FOR EACH ROW
-BEGIN
-  UPDATE FactureCommande SET FraisService = FraisService WHERE id_facture = NEW.id_facture;
-END;
+INSERT INTO Membre (description, dateMembre, pointMin, pointMax, seuil, id_type_membre) VALUES ('Bronze', '2018-01-01', 0, 100, 0, 1);
+INSERT INTO Membre (description, dateMembre, pointMin, pointMax, seuil, id_type_membre) VALUES ('Argent', '2018-01-01', 101, 200, 0, 2);
 
-ALTER TABLE Facture ADD prix float(9,2) NOT NULL;
-ALTER TABLE Facture ADD remise float(9,2) NOT NULL;
+INSERT INTO TypeRegle (libelle, nombre_points, date, valeur) VALUES ('Achat', 10, '2018-01-01', 10);
+INSERT INTO TypeRegle (libelle, nombre_points, date, valeur) VALUES ('Achat', 1000, '2020-01-01', 100);
+INSERT INTO TypeRegle (libelle, nombre_points, date, valeur) VALUES ('Achat', 10, '2018-09-01', 10);
+
+INSERT INTO TypeOperation (type_operation, nombre_Points, libelle, id_type_regle) VALUES ('Achat', 10, 'Achat', 1);
+INSERT INTO TypeOperation (type_operation, nombre_Points, libelle, id_type_regle) VALUES ('Achat', 1000, 'Achat', 2);
+
+
+INSERT INTO HistoriquePoint (date, description, id_type_regle) VALUES ('2018-01-01', 'Achat', 1);
+INSERT INTO HistoriquePoint (date, description, id_type_regle) VALUES ('2020-01-01', 'Achat', 2);
+INSERT INTO HistoriquePoint (date, description, id_type_regle) VALUES ('2018-01-01', 'Achat', 1);
+
+
+INSERT INTO Client (nom, prenom, email, dateNaissance, noBancaire, website, facebook, actif, description, id_adresse, id_telephone, id_membre)
+VALUES
+  ('John', 'Doe', 'john.doe@example.com', '1990-01-01', '1234567890', 'www.example.com', 'facebook.com/johndoe', 1, 'Description of John Doe', 1, 1, NULL),
+  ('Jane', 'Smith', 'jane.smith@example.com', '1992-03-15', '0987654321', 'www.example.com', 'facebook.com/janesmith', 1, 'Description of Jane Smith', 2, 2, NULL),
+  ('Mike', 'Johnson', 'mike.johnson@example.com', '1985-07-20', '9876543210', 'www.example.com', 'facebook.com/mikejohnson', 0, 'Description of Mike Johnson', 3, 3, 1);
+
+INSERT INTO Point (nombrePoint, date, id_client)
+VALUES
+  (100, '2023-01-01', 1),
+  (50, '2023-02-15', 2),
+  (200, '2023-03-20', 1);
+
+INSERT INTO TypePayement (libelle)
+VALUES
+  ('Cash'),
+  ('Credit Card'),
+  ('Bank Transfer');
+
+INSERT INTO Fournisseur (nom, email, libelle, adresse, telephone)
+VALUES
+  ('Fournisseur 1', 'fournisseur1@example.com', 'Libelle 1', 'Adresse 1', '1234567890'),
+  ('Fournisseur 2', 'fournisseur2@example.com', 'Libelle 2', 'Adresse 2', '9876543210'),
+  ('Fournisseur 3', 'fournisseur3@example.com', 'Libelle 3', 'Adresse 3', '5555555555'),
+  ('Fournisseur 4', 'fournisseur4@example.com', 'Libelle 4', 'Adresse 4', '1111111111'),
+  ('Fournisseur 5', 'fournisseur5@example.com', 'Libelle 5', 'Adresse 5', '2222222222'),
+  ('Fournisseur 6', 'fournisseur6@example.com', 'Libelle 6', 'Adresse 6', '3333333333');
+
+
+INSERT INTO Produit (nom, description, prix, stock, statut)
+VALUES ('Produit 1', 'Description du produit 1', 19.99, 50, 'En stock');
+INSERT INTO Produit (nom, description, prix, stock, statut)
+VALUES ('Produit 2', 'Description du produit 2', 29.99, 100, 'En stock');
+INSERT INTO Produit (nom, description, prix, stock, statut)
+VALUES ('Produit 3', 'Description du produit 3', 9.99, 20, 'En rupture de stock');
+INSERT INTO Produit (nom, description, prix, stock, statut)
+VALUES ('Produit 4', 'Description du produit 4', 39.99, 75, 'En stock');
+
+
+INSERT INTO Commande (dateCommande, id_client, dateReception, statut)
+VALUES ('2023-06-15', 1, '2023-06-20', 'En attente');
+
+INSERT INTO Facture (nom, dateFacture, FraisService, dateUpdate, valider, remise)
+VALUES ('Facture 1', '2023-06-15', 5.99, '2023-06-16', TRUE,0.0);
+
+INSERT INTO Remise (dateRemise, montant, id_facture, id_historique_point)
+VALUES ('2023-06-15', 10.00, 1, 1);
+
+INSERT INTO FactureCommande (id_facture, id_commande)
+VALUES (1, 1);
+
+INSERT INTO Contient (id_commande, id_produit, quantite, status, remarque, prixVente, dateLivraison)
+VALUES (1, 1, 2, 'En cours', 'Aucune remarque', 19.99, '2023-06-20');
+
+INSERT INTO Contient (id_commande, id_produit, quantite, status, remarque, prixVente, dateLivraison)
+VALUES (1, 2, 1, 'En cours', 'Remarque spéciale', 29.99, '2023-06-20');
+
+INSERT INTO Concierge (nom, prenom, email, login, password, actif, telephone)
+VALUES ('Doe', 'John', 'john.doe@example.com', 'johndoe', 'password123', TRUE, '123456789');
+
+INSERT INTO TypeAction (libelle, date)
+VALUES ('Action 1', '2023-06-15');
+
+INSERT INTO TypeAction (libelle, date)
+VALUES ('Action 2', '2023-06-16');
+
+INSERT INTO TypeAction (libelle, date)
+VALUES ('Action 3', '2023-06-17');
+
+INSERT INTO Log (date, url, objetModifie, idObjetModifie, id_concierge, id_type_action)
+VALUES ('2023-06-15', '/example-url', 'Objet 1', 1, 1, 1);
+INSERT INTO Log (date, url, objetModifie, idObjetModifie, id_concierge, id_type_action)
+VALUES ('2023-06-16', '/another-url', 'Objet 2', 2, 1, 2);
+INSERT INTO Log (date, url, objetModifie, idObjetModifie, id_concierge, id_type_action)
+VALUES ('2023-06-17', '/third-url', 'Objet 3', 2, 1, 3);
+
+INSERT INTO Valider (id_commande, id_concierge, dateAcces, dateMaj)
+VALUES (1, 1, '2023-06-15', '2023-06-16');
+
+INSERT INTO Payement (montant, datePayement, id_type_payement)
+VALUES (100.00, '2023-06-16', 1);
+
+INSERT INTO Paye (id_facture, id_payement)
+VALUES (1, 1);
+
+INSERT INTO Fabrique (id_produit, id_fournisseur)
+VALUES (1, 1);
+
+INSERT INTO Fabrique (id_produit, id_fournisseur)
+VALUES (2, 2);
+
+INSERT INTO Fabrique (id_produit, id_fournisseur)
+VALUES (3, 3);
+
+INSERT INTO EstLie_Membre_Regle (id_type_membre, id_type_regle)
+VALUES (1, 1);
+
+INSERT INTO EstLie_Membre_Regle (id_type_membre, id_type_regle)
+VALUES (2, 2);
+
+
+
+
+
+
+
